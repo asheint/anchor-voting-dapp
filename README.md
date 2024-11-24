@@ -92,3 +92,8 @@ Build the web app
 ```shell
 pnpm build
 ```
+
+DEMO:
+
+![App demo screenshot](https://github.com/asheint/anchor-voting-dapp/blob/main/public/Screenshot%20(1174).png)
+
