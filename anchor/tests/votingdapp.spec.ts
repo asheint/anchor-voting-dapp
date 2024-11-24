@@ -12,15 +12,16 @@ describe('votingdapp', () => {
 
   let context;
   let provider;
-  let votingdappProgram: Program<Votingdapp>;
+  anchor.setProvider(anchor.AnchorProvider.env());
+  let votingdappProgram = anchor.workspace.Votingdapp as Program<Votingdapp>;
 
   beforeAll(async () => {
-    context = await startAnchor("", [{name: "votingdapp", programId: votingAddress}], []);
-	  provider = new BankrunProvider(context);
-    votingdappProgram = new Program<Votingdapp>(
-      IDL,
-      provider,
-    );
+    // context = await startAnchor("", [{name: "votingdapp", programId: votingAddress}], []);
+	  // provider = new BankrunProvider(context);
+    // votingdappProgram = new Program<Votingdapp>(
+    //   IDL,
+    //   provider,
+    // );
   })
   
   it('Initialize Votingdapp', async () => {
@@ -43,7 +44,7 @@ describe('votingdapp', () => {
     expect(poll.pollId.toNumber()).toEqual(1);
     expect(poll.pollDescription).toEqual("What is your favorite type of peanut butter?");
     expect(poll.pollStart.toNumber()).toBeLessThan(poll.pollEnd.toNumber());
-  });
+  }, 10000);
 
   it("initialize candidate", async () => {
     await votingdappProgram.methods.initializeCandidate(
